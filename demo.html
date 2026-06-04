@@ -714,9 +714,10 @@
 
     @media(max-width:767px) {
         .txtdiv1 {
-    width: auto;
-    text-align: left;
-}
+            width: auto;
+            text-align: left;
+        }
+
         .awthub-wrapper {
             padding: 20px 0;
         }
@@ -957,29 +958,7 @@
    SVG CONTAINER
 =================================== */
 
-    .node1::after {
-        content: '';
-        position: absolute;
-        width: 0px;
-        height: 43px;
-        border-top: 3px solid #2196f3;
-        border-right: 3px solid #2196f3;
-        right: 35px;
-        top: 71px;
-        transform: rotate(294deg);
-    }
 
-    .node1::before {
-        content: '';
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        border: 3px solid #2196f3;
-        background: #fff;
-        border-radius: 50%;
-        right: 0px;
-        top: 96px;
-    }
 
     .node {
         position: absolute;
@@ -993,6 +972,20 @@
         background: #fff;
         border-radius: 50%;
         z-index: 20;
+    }
+
+    .node1::after {
+        right: -2px;
+        top: 98px;
+        border: 4px solid #2196f3;
+    }
+
+    .node1::before {
+        width: 43px;
+        right: 1px;
+        top: 86px;
+        background: #2196f3 !important;
+        transform: rotate(52deg);
     }
 
     .node2::after {
@@ -1180,7 +1173,7 @@
     }
 
     @media (max-width:768px) {
-        .node{
+        .node {
             position: relative;
         }
 
