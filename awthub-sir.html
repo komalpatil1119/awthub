@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWTHUB - Smart Hospital Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e8f4fd 0%, #f0f8ff 40%, #e0f0fa 100%);
+    min-height: 100vh;
+    padding: 30px 20px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 4px;
+  }
+
+  .logo-awt {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1a5fa8;
+    letter-spacing: -1px;
+  }
+
+  .logo-hub {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f5a623, #e8820c);
+    color: white;
+    padding: 2px 12px 2px 8px;
+    border-radius: 6px;
+    margin-left: 2px;
+    letter-spacing: -1px;
+  }
+
+  .logo-hub span {
+    display: inline-block;
+    width: 4px; height: 28px;
+    background: white;
+    margin-right: 6px;
+    border-radius: 2px;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+  }
+
+  .tagline-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1a5fa8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .tagline-sub {
+    font-size: 0.85rem;
+    color: #555;
+    font-weight: 500;
+  }
+
+  .tagline-sub span {
+    color: #1a5fa8;
+    font-weight: 700;
+  }
+
+  /* MAIN LAYOUT */
+  .main-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr 260px;
+    gap: 20px;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  /* MODULE CARDS */
+  .module-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px 12px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.09);
+    margin-bottom: 12px;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .module-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+  }
+
+  .module-card .icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  .module-card .card-text {
+    text-align: left;
+  }
+
+  .module-card .card-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1a2c4e;
+    line-height: 1.2;
+  }
+
+  .module-card .card-desc {
+    font-size: 0.68rem;
+    color: #777;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.4;
+  }
+
+  .left-col .module-card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+
+  .right-col .module-card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+
+  /* Icon colors */
+  .ic-tpa { background: #fff3e0; }
+  .ic-patient { background: #e3f2fd; }
+  .ic-doctor { background: #e8f5e9; }
+  .ic-inventory { background: #fce4ec; }
+  .ic-employee { background: #ede7f6; }
+  .ic-accounts { background: #fff8e1; }
+  .ic-opd { background: #e0f7fa; }
+  .ic-ipd { background: #fce4ec; }
+  .ic-daycare { background: #e8f5e9; }
+  .ic-diagnosis { background: #e3f2fd; }
+  .ic-pathology { background: #fce4ec; }
+  .ic-billing { background: #fff3e0; }
+  .ic-nursing { background: #e0f2f1; }
+  .ic-users { background: #ede7f6; }
+
+  /* CENTER SECTION */
+  .center-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .reception-card {
+    background: white;
+    border-radius: 26px;
+    padding: 0;
+    box-shadow: 0 8px 40px rgba(26,95,168,0.15);
+    overflow: hidden;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+  }
+
+  .reception-inner {
+    background: linear-gradient(180deg, #f0f8ff 0%, #e8f4fc 100%);
+    padding: 24px 20px 16px;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Fake hospital reception scene */
+  .reception-scene {
+    background: linear-gradient(180deg, #cce8fa 0%, #e8f5fd 60%, #f5faff 100%);
+    border-radius: 18px;
+    padding: 18px 16px 0;
+    margin-bottom: 0;
+    position: relative;
+    min-height: 200px;
+    overflow: hidden;
+  }
+
+  .scene-signage {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+
+  .sign-panel {
+    background: #1a5fa8;
+    color: white;
+    font-size: 0.55rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .sign-panel .arrow {
+    font-size: 0.6rem;
+  }
+
+  .sign-panel.right-side {
+    background: #2196f3;
+  }
+
+  .signs-left, .signs-right {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .signs-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .reception-desk {
+    background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);
+    border-radius: 18px 18px 0 0;
+    padding: 14px 20px 10px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    position: relative;
+  }
+.clsbtm{
+  text-align: left;
+    padding-left: 10px;
+}
+  .desk-logo {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1a5fa8;
+    letter-spacing: 1px;
+  }
+
+  .desk-sub {
+    font-size: 0.6rem;
+    color: #1a5fa8;
+    font-weight: 500;
+  }
+
+  /* Person avatar */
+  .person-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0 0;
+  }
+
+  .person-avatar {
+    width: 70px; height: 90px;
+    background: linear-gradient(180deg, #fde8d8 0%, #f5c6a8 100%);
+    border-radius: 50% 50% 0 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .person-head {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #f5c6a8, #e8a87c);
+    border-radius: 50%;
+    margin-top: 8px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .person-head::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: 2px;
+    width: 32px; height: 20px;
+    background: #3d2314;
+    border-radius: 50% 50% 0 0;
+  }
+
+  .person-body {
+    width: 56px; height: 50px;
+    background: linear-gradient(180deg, #1565c0, #1976d2);
+    border-radius: 6px 6px 0 0;
+    margin-top: -6px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 6px;
+  }
+
+  .lanyard {
+    width: 16px; height: 20px;
+    background: #ffd600;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.3rem;
+    color: #333;
+    font-weight: bold;
+  }
+
+  /* Desktop on desk */
+  .desk-computer {
+    position: absolute;
+    right: 18px; bottom: 10px;
+    width: 44px; height: 34px;
+  }
+
+  .monitor {
+    width: 44px; height: 28px;
+    background: #222;
+    border-radius: 5px;
+    border: 2px solid #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.35rem;
+    color: #4fc3f7;
+  }
+
+  .monitor-stand {
+    width: 12px; height: 6px;
+    background: #555;
+    margin: 0 auto;
+    border-radius: 0 0 3px 3px;
+  }
+
+  /* AWTHUB label on desk front */
+  .desk-front-label {
+    text-align: center;
+    padding: 8px 0 4px;
+  }
+
+  .desk-front-label .big-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #1a5fa8;
+    letter-spacing: 2px;
+  }
+
+  .desk-front-label .sub-name {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #888;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* FEATURE BADGES */
+  .feature-badges {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 10px;
+    margin-top: 4px;
+  }
+
+  .badge {
+    background: white;
+    border: 1.5px solid #e3f0ff;
+    border-radius: 10px;
+    padding: 8px 10px;
+    text-align: center;
+    flex: 1;
+    min-width: 70px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .badge .badge-icon {
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .badge .badge-title {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #1a5fa8;
+    display: block;
+    line-height: 1.2;
+  }
+
+  .badge .badge-sub {
+    font-size: 0.55rem;
+    color: #888;
+    display: block;
+    line-height: 1.3;
+  }
+
+  /* BOTTOM ROW - Nursing & Users */
+  .bottom-modules {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .bottom-module {
+    display: flex;
+    background: white;
+    border-radius: 14px;
+    padding: 12px 16px;
+    text-align: center;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.09);
+    width:100%;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .bottom-module:hover { transform: translateY(-3px); }
+
+  .bottom-module .icon-wrap {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 6px;
+  }
+
+  .bottom-module .card-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1a2c4e;
+  }
+
+  .bottom-module .card-desc {
+    font-size: 0.62rem;
+    color: #777;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  /* Decorative background blobs */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(33,150,243,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(245,166,35,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { position: relative; z-index: 1; }
+
+  /* Connector dots */
+  .left-col .module-card::after {
+    content: '';
+    position: absolute;
+    right: -14px; top: 50%;
+    transform: translateY(-50%);
+    width: 10px; height: 10px;
+    background: #1a5fa8;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #1a5fa8;
+  }
+
+  .right-col .module-card::before {
+    content: '';
+    position: absolute;
+    left: -14px; top: 50%;
+    transform: translateY(-50%);
+    width: 10px; height: 10px;
+    background: #1a5fa8;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #1a5fa8;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .module-card, .bottom-module, .badge {
+    animation: fadeInUp 0.5s ease both;
+  }
+
+  .left-col .module-card:nth-child(1) { animation-delay: 0.05s; }
+  .left-col .module-card:nth-child(2) { animation-delay: 0.10s; }
+  .left-col .module-card:nth-child(3) { animation-delay: 0.15s; }
+  .left-col .module-card:nth-child(4) { animation-delay: 0.20s; }
+  .left-col .module-card:nth-child(5) { animation-delay: 0.25s; }
+  .left-col .module-card:nth-child(6) { animation-delay: 0.30s; }
+  .right-col .module-card:nth-child(1) { animation-delay: 0.05s; }
+  .right-col .module-card:nth-child(2) { animation-delay: 0.10s; }
+  .right-col .module-card:nth-child(3) { animation-delay: 0.15s; }
+  .right-col .module-card:nth-child(4) { animation-delay: 0.20s; }
+  .right-col .module-card:nth-child(5) { animation-delay: 0.25s; }
+  .right-col .module-card:nth-child(6) { animation-delay: 0.30s; }
+  @media (max-width: 768px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .left-col .module-card::after {
+      display: none;
+    }
+    .right-col .module-card::before{
+      display: none;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">
+      <span class="logo-awt">AWT</span>
+      <span class="logo-hub"><span></span>HUB</span>
+    </div>
+    <div class="tagline-title">Smart Hospital Management System</div>
+    <div class="tagline-sub">
+      <span>One Hub</span> &nbsp;●&nbsp; <span>All Solutions</span> &nbsp;●&nbsp; <span>Better Healthcare</span>
+    </div>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout">
+
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+
+      <div class="module-card">
+        <div class="icon-wrap ic-tpa">📋</div>
+        <div class="card-text">
+          <div class="card-title">TPA<br>Management</div>
+          <div class="card-desc">Streamline insurance approvals and claims</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-patient">👩‍⚕️</div>
+        <div class="card-text">
+          <div class="card-title">Patient<br>Management</div>
+          <div class="card-desc">Manage patient records, history & appointments</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-doctor">👨‍⚕️</div>
+        <div class="card-text">
+          <div class="card-title">Doctor<br>Management</div>
+          <div class="card-desc">Manage doctor profiles, schedules & availability</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-inventory">📦</div>
+        <div class="card-text">
+          <div class="card-title">Inventory<br>Management</div>
+          <div class="card-desc">Track medicines, supplies and stock in real-time</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-employee">👥</div>
+        <div class="card-text">
+          <div class="card-title">Employee<br>Management</div>
+          <div class="card-desc">Manage staff records, attendance & payroll</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-accounts">🧾</div>
+        <div class="card-text">
+          <div class="card-title">Accounts<br>Management</div>
+          <div class="card-desc">Manage income, expenses and financial reports</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CENTER SECTION -->
+    <div class="center-section">
+
+      <div class="reception-card">
+        <div class="reception-inner">
+
+          <!-- Signs -->
+          <div class="signs-container">
+            <div class="signs-left">
+              <div class="sign-panel">OPD <span class="arrow">→</span></div>
+              <div class="sign-panel">LABORATORY <span class="arrow">→</span></div>
+              <div class="sign-panel">PHARMACY <span class="arrow">→</span></div>
+            </div>
+            <div class="signs-right">
+              <div class="sign-panel right-side">WARD <span class="arrow">→</span></div>
+              <div class="sign-panel right-side">RADIOLOGY <span class="arrow">→</span></div>
+              <div class="sign-panel right-side">BILLING <span class="arrow">→</span></div>
+            </div>
+          </div>
+
+          <!-- Reception desk visual -->
+          <div class="reception-desk">
+            <!-- Person Avatar -->
+            <div class="person-wrap">
+              <div style="display:flex;flex-direction:column;align-items:center;position:relative;">
+                <div class="person-head"></div>
+                <div class="person-body">
+                  <div class="lanyard">ID</div>
+                </div>
+                <div class="desk-computer">
+                  <div class="monitor">💻</div>
+                  <div class="monitor-stand"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Desk brand -->
+            <div class="desk-front-label">
+              <div class="big-name">AWTHUB</div>
+              <div class="sub-name">Your Health, Our Priority</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom label -->
+        <div style="background:#1a5fa8;color:white;text-align:center;padding:8px;font-size:0.8rem;font-weight:700;letter-spacing:3px;">
+          AWTHUB &nbsp;|&nbsp; <span style="font-weight:400;letter-spacing:2px;font-size:0.72rem;">RECEPTION</span>
+        </div>
+      </div>
+
+      <!-- Feature badges -->
+      <div class="feature-badges">
+        <div class="badge">
+          <span class="badge-icon">🔒</span>
+          <span class="badge-title">Secure</span>
+          <span class="badge-sub">Your Data is Safe</span>
+        </div>
+        <div class="badge">
+          <span class="badge-icon">📊</span>
+          <span class="badge-title">Real-time</span>
+          <span class="badge-sub">Insights for Better Decisions</span>
+        </div>
+        <div class="badge">
+          <span class="badge-icon">⚙️</span>
+          <span class="badge-title">Automated</span>
+          <span class="badge-sub">Workflows Save Time</span>
+        </div>
+        <div class="badge">
+          <span class="badge-icon">❤️</span>
+          <span class="badge-title">Better Care</span>
+          <span class="badge-sub">Happier Patients</span>
+        </div>
+      </div>
+
+      <!-- Bottom modules: Nursing & Users -->
+      <div class="bottom-modules">
+        <div class="bottom-module">
+          <div class="icon-wrap ic-nursing">👩‍⚕️</div>
+          <div class="clsbtm">
+            <div class="card-title">Nursing Management</div>
+          <div class="card-desc">Assign tasks, track rounds and nursing activities</div>
+          </div>
+        </div>
+        <div class="bottom-module">
+          <div class="icon-wrap ic-users">⚙️</div>
+          <div class="clsbtm">
+            <div class="card-title">Users Management</div>
+          <div class="card-desc">Role-based access and user control</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-col">
+
+      <div class="module-card">
+        <div class="icon-wrap ic-opd">🩺</div>
+        <div class="card-text">
+          <div class="card-title">OPD<br>Management</div>
+          <div class="card-desc">Manage OPD flow, queues and consultations</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-ipd">🏥</div>
+        <div class="card-text">
+          <div class="card-title">IPD<br>Management</div>
+          <div class="card-desc">Manage in-patient admissions, discharges & transfers</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-daycare">💊</div>
+        <div class="card-text">
+          <div class="card-title">Day Care<br>Management</div>
+          <div class="card-desc">Manage prescriptions, medicines & pharmacy</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-diagnosis">🧪</div>
+        <div class="card-text">
+          <div class="card-title">Diagnosis<br>Management</div>
+          <div class="card-desc">Manage medicine sales, stock & expiry alerts</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-pathology">🫀</div>
+        <div class="card-text">
+          <div class="card-title">Pathology<br>Management</div>
+          <div class="card-desc">Manage lab tests, reports & results</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="icon-wrap ic-billing">🧾</div>
+        <div class="card-text">
+          <div class="card-title">Billing System</div>
+          <div class="card-desc">Generate bills, invoices and payment tracking</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
