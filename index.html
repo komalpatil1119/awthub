@@ -1,1 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+
+</head>
+<style>
+    /* =========================
+   GLOBAL
+========================= */
+
+    .awthub-wrapper {
+        background: #f5f8ff;
+        padding: 10px 0 120px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .awthub-header {
+        margin-bottom: 0px;
+    }
+
+    .logo-circle {
+        width: 120px;
+        height: 120px;
+        margin: auto;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+    }
+
+    .logo-circle img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .awthub-title {
+        font-size: 50px;
+        font-weight: 900;
+        color: #0d47a1;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        letter-spacing: 2px;
+    }
+
+    .awthub-subtitle {
+        color: #444;
+        font-weight: 700;
+        margin-bottom: 0px;
+        font-size: 18px;
+    }
+
+    .awthub-header p {
+        color: #777;
+        font-size: 15px;
+        margin-top: 5px;
+    }
+
+    /* =========================
+   MAIN AREA
+========================= */
+
+    .hospital-circle {
+        width: 100%;
+        height: 1100px;
+        margin: auto;
+        position: relative;
+    }
+
+    /* =========================
+   SVG
+========================= */
+
+    .circle-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .main-ring {
+        fill: none;
+        stroke: #d8dee8;
+        stroke-width: 4;
+        stroke-dasharray: 8 8;
+    }
+
+    .left-ring {
+        fill: none;
+        stroke: #2f8cff;
+        stroke-width: 4;
+    }
+
+    .right-ring {
+        fill: none;
+        stroke: #ff9800;
+        stroke-width: 4;
+    }
+
+    /* =========================
+   CENTER IMAGE
+========================= */
+
+    .center-panel {
+        width: 670px;
+        height: 529px;
+        position: absolute;
+        left: 50%;
+        top: 30%;
+
+        transform: translate(-50%, -50%);
+
+        border-radius: 350px 350px 230px 230px;
+        overflow: hidden;
+
+        border: 12px solid #fff;
+
+        background: #fff;
+
+        box-shadow: 0 20px 60px rgba(0, 0, 0, .18);
+
+        z-index: 5;
+    }
+
+    .center-panel img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .center-overlay {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        padding: 12px 25px;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .center-overlay h2 {
+        margin: 0;
+        color: #0d47a1;
+        font-weight: 800;
+    }
+
+    .center-overlay span {
+        color: #666;
+        font-size: 14px;
+    }
+
+    /* =========================
+   NODES
+========================= */
+
+    .node {
+        position: absolute;
+        width: 325px;
+        text-align: center;
+        z-index: 10;
+    }
+
+
+
+    .node h5 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-top: 5px;
+        margin-bottom: 0px;
+    }
+
+    .node p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #666;
+        margin-top: 0px;
+    }
+
+    /* =========================
+   ICON BOX
+========================= */
+
+    .icon-box {
+        width: 90px;
+        height: 90px;
+        padding: 9px;
+        margin: auto;
+
+        border-radius: 50%;
+
+        background: #fff;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 4px solid;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
+        /* transition: .4s; */
+    }
+
+    .icon-box i {
+        font-size: 52px;
+    }
+
+    .node:hover .icon-box {
+        /* transform: translateY(-8px); */
+    }
+
+    /* =========================
+   COLORS
+========================= */
+
+    .blue {
+        color: #2196f3;
+        border-color: #2196f3;
+    }
+
+    .cyan {
+        color: #00bcd4;
+        border-color: #00bcd4;
+    }
+
+    .green {
+        color: #4caf50;
+        border-color: #4caf50;
+    }
+
+    .lime {
+        color: #8bc34a;
+        border-color: #8bc34a;
+    }
+
+    .yellow {
+        color: #ffc107;
+        border-color: #ffc107;
+    }
+
+    .orange {
+        color: #ff9800;
+        border-color: #ff9800;
+    }
+
+    .coral {
+        color: #ff7043;
+        border-color: #ff7043;
+    }
+
+    .purple {
+        color: #9c27b0;
+        border-color: #9c27b0;
+    }
+
+    .violet {
+        color: #7e57c2;
+        border-color: #7e57c2;
+    }
+
+    .pink {
+        color: #ec407a;
+        border-color: #ec407a;
+    }
+
+    .indigo {
+        color: #3f51b5;
+        border-color: #3f51b5;
+    }
+
+    .txtdiv {
+        width: 180px;
+        text-align: right;
+    }
+
+    .txtdiv1 {
+        width: 180px;
+        text-align: left;
+    }
+
+    /* =========================
+   LEFT POSITIONS
+========================= */
+
+    .node1 {
+        left: 29px;
+        top: 0px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .node2 {
+        left: -35px;
+        top: 102px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .node3 {
+        left: -68px;
+        top: 230px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .node4 {
+        left: -58px;
+        top: 364px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .node5 {
+        left: -12px;
+        top: 493px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .node6 {
+        left: 84px;
+        top: 604px;
+
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    /* =========================
+   RIGHT POSITIONS
+========================= */
+
+    .node7 {
+        right: 5px;
+        top: 11px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .node8 {
+        right: -58px;
+        top: 120px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .node9 {
+        right: -81px;
+        top: 237px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .node10 {
+        right: -80px;
+        top: 371px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .node11 {
+        right: -25px;
+        top: 495px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .node12 {
+        right: 93px;
+        top: 616px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    /* =========================
+   BOTTOM CENTER
+========================= */
+
+    .node13 {
+        left: 42%;
+        bottom: 160px;
+        transform: translateX(-180px);
+    }
+
+    .node14 {
+        left: 43%;
+        bottom: 160px;
+        transform: translateX(30px);
+    }
+
+    /* =========================
+   FEATURE BOX
+========================= */
+
+    .feature-box {
+        width: 470px;
+        position: absolute;
+        left: 50%;
+        bottom: 345px;
+        transform: translateX(-50%);
+
+        background: #fff;
+
+        border-radius: 30px;
+
+        padding: 15px 15px 15px;
+
+        display: flex;
+        justify-content: space-around;
+
+        border: 4px solid #0d47a1;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, .08);
+
+        z-index: 20;
+    }
+
+    .feature-item {
+        text-align: center;
+    }
+
+    .feature-item i {
+        font-size: 35px;
+        line-height: 35px;
+        color: #0d47a1;
+    }
+
+    .feature-item h6 {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-weight: 700;
+    }
+
+    .feature-item span {
+        font-size: 13px;
+        color: #666;
+    }
+
+    /* ===================================
+   CONNECTOR DOTS
+=================================== */
+
+    .connector-dot {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        border-radius: 50%;
+        z-index: 15;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    }
+
+    .dot-blue {
+        border: 4px solid #2196f3;
+    }
+
+    .dot-orange {
+        border: 4px solid #ff9800;
+    }
+
+    /* LEFT SIDE DOTS */
+
+    .dot1 {
+        left: 310px;
+        top: 120px;
+    }
+
+    .dot2 {
+        left: 240px;
+        top: 300px;
+    }
+
+    .dot3 {
+        left: 240px;
+        top: 500px;
+    }
+
+    .dot4 {
+        left: 280px;
+        top: 700px;
+    }
+
+    .dot5 {
+        left: 370px;
+        top: 890px;
+    }
+
+    /* RIGHT SIDE DOTS */
+
+    .dot6 {
+        right: 310px;
+        top: 120px;
+    }
+
+    .dot7 {
+        right: 240px;
+        top: 300px;
+    }
+
+    .dot8 {
+        right: 240px;
+        top: 500px;
+    }
+
+    .dot9 {
+        right: 280px;
+        top: 700px;
+    }
+
+    .dot10 {
+        right: 370px;
+        top: 890px;
+    }
+
+    /* ===================================
+   ICON HOVER
+=================================== */
+
+    .node:hover .icon-box {
+        /* transform: translateY(-10px) scale(1.05); */
+        box-shadow: 0 20px 45px rgba(0, 0, 0, .15);
+    }
+
+    .node:hover h5 {
+        color: #0d47a1;
+    }
+
+
+    /* ===================================
+   FEATURE BOX HOVER
+=================================== */
+
+    .feature-item {
+        transition: .4s;
+    }
+
+    .feature-item:hover {
+        transform: translateY(-6px);
+    }
+
+    .feature-item:hover i {
+        transform: scale(1.1);
+    }
+
+    .feature-item i {
+        transition: .4s;
+    }
+
+    /* ===================================
+   IMAGE OVERLAY EFFECT
+=================================== */
+
+    .center-panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom,
+                rgba(0, 0, 0, .15),
+                rgba(0, 0, 0, .02));
+        z-index: 1;
+    }
+
+    .center-overlay {
+        z-index: 5;
+    }
+
+    /* ===================================
+   LARGE SCREEN
+=================================== */
+
+    @media(min-width:1600px) {
+
+        .hospital-circle {
+            transform: scale(1.05);
+        }
+
+    }
+
+    /* ===================================
+   LAPTOP
+=================================== */
+
+    @media(max-width:1400px) {
+
+        .hospital-circle {
+            transform: scale(.85);
+            transform-origin: top center;
+            height: 950px;
+        }
+
+    }
+
+    /* ===================================
+   TABLET
+=================================== */
+
+    @media(max-width:991px) {
+
+        .hospital-circle {
+
+            width: 100%;
+            height: auto;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 25px;
+
+            padding-bottom: 30px;
+        }
+
+        /* Hide SVG Ring */
+
+        .circle-svg {
+            display: none;
+        }
+
+        /* Remove Absolute Position */
+
+        .node,
+        .node1,
+        .node2,
+        .node3,
+        .node4,
+        .node5,
+        .node6,
+        .node7,
+        .node8,
+        .node9,
+        .node10,
+        .node11,
+        .node12,
+        .node13,
+        .node14 {
+
+            position: relative;
+
+            left: auto;
+            right: auto;
+            top: auto;
+            bottom: auto;
+
+            transform: none;
+
+            width: 100%;
+        }
+
+        /* Center Image */
+
+        .center-panel {
+
+            position: relative;
+
+            left: auto;
+            top: auto;
+
+            transform: none;
+
+            width: 100%;
+            max-width: 600px;
+
+            height: 420px;
+
+            margin: auto;
+
+            grid-column: 1/-1;
+        }
+
+        /* Feature Box */
+
+        .feature-box {
+
+            position: relative;
+
+            left: auto;
+            bottom: auto;
+
+            transform: none;
+
+            width: 100%;
+
+            grid-column: 1/-1;
+
+            flex-wrap: wrap;
+
+            gap: 20px;
+        }
+
+        .feature-item {
+            width: 48%;
+        }
+
+        .connector-dot {
+            display: none;
+        }
+
+        .awthub-title {
+            font-size: 50px;
+        }
+
+    }
+
+    /* ===================================
+   MOBILE
+=================================== */
+
+    @media(max-width:767px) {
+        .txtdiv1 {
+            width: auto;
+            text-align: left;
+        }
+
+        .awthub-wrapper {
+            padding: 20px 0;
+        }
+
+        .awthub-header {
+            margin-bottom: 20px;
+        }
+
+        .awthub-title {
+            font-size: 36px;
+        }
+
+        .awthub-subtitle {
+            font-size: 18px;
+        }
+
+        .hospital-circle {
+
+            display: block;
+        }
+
+        .center-panel {
+            margin-bottom: 30px;
+            height: 300px;
+
+            border-radius: 30px;
+        }
+
+        .node {
+            margin-bottom: 10px;
+        }
+
+        .icon-box {
+
+            width: 90px;
+            height: 90px;
+        }
+
+        .icon-box i {
+            font-size: 40px;
+        }
+
+        .node h5 {
+            font-size: 17px;
+        }
+
+        .node p {
+            font-size: 13px;
+        }
+
+        .feature-box {
+            padding: 20px;
+        }
+
+        .feature-item {
+            width: 100%;
+        }
+
+        .feature-item i {
+            font-size: 32px;
+        }
+
+        .icon-box {
+            width: 90px;
+            height: 90px;
+            margin: 0 25px 0px 0px;
+        }
+
+        .node13 {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .node14 {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .feature-box {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .feature-item {
+            width: calc(50% - 8px);
+            text-align: center;
+        }
+
+        .node1,
+        .node2,
+        .node3,
+        .node4,
+        .node5,
+        .node6,
+        .node7 {
+            display: flex;
+            flex-direction: revert;
+            align-items: center;
+        }
+
+        .txtdiv {
+            text-align: left;
+        }
+    }
+
+    /* ===================================
+   SMALL MOBILE
+=================================== */
+
+    @media(max-width:480px) {
+
+        .awthub-title {
+            font-size: 30px;
+        }
+
+        .logo-circle {
+            width: 90px;
+            height: 90px;
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+        }
+
+        .icon-box i {
+            font-size: 34px;
+        }
+
+    }
+
+    /* ===================================
+   SVG CONNECTOR COLORS
+=================================== */
+
+    .connector-blue,
+    .connector-cyan,
+    .connector-green,
+    .connector-lime,
+    .connector-yellow,
+    .connector-orange,
+    .connector-orange2,
+    .connector-coral,
+    .connector-purple,
+    .connector-violet,
+    .connector-pink,
+    .connector-indigo {
+
+        fill: none;
+        stroke-width: 4;
+        stroke-linecap: round;
+        opacity: .85;
+
+        stroke-dasharray: 10 8;
+        animation: flowLine 8s linear infinite;
+    }
+
+    /* LEFT SIDE */
+
+    .connector-blue {
+        stroke: #2196f3;
+    }
+
+    .connector-cyan {
+        stroke: #00bcd4;
+    }
+
+    .connector-green {
+        stroke: #4caf50;
+    }
+
+    .connector-lime {
+        stroke: #8bc34a;
+    }
+
+    .connector-yellow {
+        stroke: #ffc107;
+    }
+
+    /* RIGHT SIDE */
+
+    .connector-orange {
+        stroke: #ff9800;
+    }
+
+    .connector-orange2 {
+        stroke: #ffb300;
+    }
+
+    .connector-coral {
+        stroke: #ff7043;
+    }
+
+    .connector-purple {
+        stroke: #9c27b0;
+    }
+
+    .connector-violet {
+        stroke: #7e57c2;
+    }
+
+    /* BOTTOM CONNECTORS */
+
+    .connector-pink {
+        stroke: #ec407a;
+    }
+
+    .connector-indigo {
+        stroke: #3f51b5;
+    }
+
+    /* ===================================
+   OUTER SVG RING
+=================================== */
+
+    .main-ring {
+        fill: none;
+        stroke: #d8dee8;
+        stroke-width: 4;
+        stroke-dasharray: 8 8;
+    }
+
+    .left-ring {
+        fill: none;
+        stroke: #2196f3;
+        stroke-width: 4;
+    }
+
+    .right-ring {
+        fill: none;
+        stroke: #ff9800;
+        stroke-width: 4;
+    }
+
+    /* ===================================
+   SVG CONTAINER
+=================================== */
+
+
+
+    .node {
+        position: absolute;
+    }
+
+    .node::after {
+        content: '';
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        border-radius: 50%;
+        z-index: 20;
+    }
+
+    .node1::after {
+        right: -2px;
+        top: 98px;
+        border: 4px solid #2196f3;
+    }
+
+    .node1::before {
+        width: 43px;
+        right: 1px;
+        top: 86px;
+        background: #2196f3 !important;
+        transform: rotate(52deg);
+    }
+
+    .node2::after {
+        right: -20px;
+        top: 55px;
+        border: 4px solid #00bcd4;
+    }
+
+    /* Doctor */
+    .node3::after {
+        right: -16px;
+        top: 55px;
+        border: 4px solid #4caf50;
+    }
+
+    /* Inventory */
+    .node4::after {
+        right: -17px;
+        top: 55px;
+        border: 4px solid #8bc34a;
+    }
+
+    /* Employee */
+    .node5::after {
+        right: -20px;
+        top: 33px;
+        border: 4px solid #ffc107;
+    }
+
+    /* Accounts */
+    .node6::after {
+        right: -9px;
+        top: 10px;
+        border: 4px solid #ff9800;
+    }
+
+    .node7::after {
+        left: -5px;
+        top: 103px;
+        border: 4px solid #ff9800;
+    }
+
+    /* IPD */
+    .node8::after {
+        left: -20px;
+        top: 72px;
+        border: 4px solid #ffc107;
+    }
+
+    /* Day Care */
+    .node9::after {
+        left: -18px;
+        top: 55px;
+        border: 4px solid #ff7043;
+    }
+
+    /* Diagnosis */
+    .node10::after {
+        left: -31px;
+        top: 55px;
+        border: 4px solid #9c27b0;
+    }
+
+    /* Pathology */
+    .node11::after {
+        left: -20px;
+        top: 26px;
+        border: 4px solid #2196f3;
+    }
+
+    /* Billing */
+    .node12::after {
+        left: 10px;
+        top: -6px;
+        border: 4px solid #7e57c2;
+    }
+
+    .node::before {
+        content: '';
+        position: absolute;
+        height: 3px;
+        background: currentColor;
+    }
+
+    /* Patient */
+    .node2::before {
+        width: 50px;
+        right: -18px;
+        top: 62px;
+        background: #00bcd4;
+        transform: rotate(9deg);
+    }
+
+    /* Doctor */
+    .node3::before {
+        width: 48px;
+        right: -12px;
+        top: 62px;
+        background: #4caf50;
+        transform: rotate(5deg);
+    }
+
+    /* Inventory */
+    .node4::before {
+        width: 43px;
+        right: -9px;
+        top: 62px;
+        background: #8bc34a;
+        transform: rotate(8deg);
+    }
+
+    /* Employee */
+    .node5::before {
+        width: 40px;
+        right: -11px;
+        top: 41px;
+        background: #ffc107;
+        transform: rotate(357deg);
+    }
+
+    /* Accounts */
+    .node6::before {
+        width: 29px;
+        right: 5px;
+        top: 28px;
+        background: #ff9800;
+        transform: rotate(-25deg);
+    }
+
+    /* OPD */
+    .node7::before {
+        width: 51px;
+        left: -6px;
+        top: 84px;
+        background: #ff9800;
+        transform: rotate(122deg);
+    }
+
+    /* IPD */
+    .node8::before {
+        width: 39px;
+        left: -3px;
+        top: 69px;
+        background: #ffc107;
+        transform: rotate(341deg);
+    }
+
+    /* Day Care */
+    .node9::before {
+        width: 42px;
+        left: -11px;
+        top: 62px;
+        background: #ff7043;
+    }
+
+    /* Diagnosis */
+    .node10::before {
+        width: 57px;
+        left: -23px;
+        top: 62px;
+        background: #9c27b0;
+    }
+
+    /* Pathology */
+    .node11::before {
+        width: 45px;
+        left: -12px;
+        top: 38px;
+        background: #2196f3;
+        transform: rotate(12deg);
+    }
+
+    /* Billing */
+    .node12::before {
+        width: 27px;
+        left: 15px;
+        top: 8px;
+        background: #7e57c2;
+        transform: rotate(37deg);
+    }
+
+    .node13::after,
+    .node14::after {
+        content: none;
+    }
+
+    @media (max-width:768px) {
+        .node {
+            position: relative;
+        }
+
+        .node::before,
+        .node::after {
+            display: none !important;
+            content: none !important;
+        }
+
+    }
+</style>
+
+<body>
+
+    <section class="awthub-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Header -->
+            <div class="awthub-header text-center">
+
+                <h1 class="awthub-title">
+                    AWTHUB
+                </h1>
+
+                <h4 class="awthub-subtitle">
+                    SMART HOSPITAL MANAGEMENT SYSTEM
+                </h4>
+
+                <p>
+                    One Hub • All Solutions • Better Healthcare
+                </p>
+
+            </div>
+
+            <!-- Main Circle Area -->
+            <div class="hospital-circle">
+
+                <!-- SVG CONNECTOR -->
+                <svg class="circle-svg" viewBox="0 0 1400 1070">
+
+                    <path class="main-ring" d="M420 90 A410 400 0 1 0 1000 100" />
+
+                    <!-- <path class="left-ring" d="M350 100 A420 420 0 0 0 350 900" />
+
+                    <path class="right-ring" d="M1050 100 A420 420 0 0 1 1050 900" /> -->
+
+                </svg>
+
+                <!-- CENTER PANEL -->
+                <div class="center-panel">
+
+                    <img src="img-icon/reception_square.png" alt="">
+
+                    <!-- <div class="center-overlay">
+
+                        <h2>
+                            AWTHUB
+                        </h2>
+
+                        <span>
+                            Smart Hospital ERP
+                        </span>
+
+                    </div> -->
+
+                </div>
+
+                <!-- LEFT SIDE -->
+
+                <div class="node node1">
+                    <div class="icon-box blue">
+                        <img src="img-icon/tpa.png" class="img-fluid">
+                    </div>
+                    <!-- <span class="connector connector1"></span> -->
+                    <div class="txtdiv">
+                        <h5>TPA Management</h5>
+                        <p>Insurance approvals & claims handling</p>
+                    </div>
+                </div>
+
+                <div class="node node2">
+                    <div class="icon-box cyan">
+                        <img src="img-icon/patient.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv">
+                        <h5>Patient Management</h5>
+                        <p>Patient registration and records</p>
+                    </div>
+                </div>
+
+                <div class="node node3">
+                    <div class="icon-box green">
+                        <img src="img-icon/doctor.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv">
+                        <h5>Doctor Management</h5>
+                        <p>Doctor schedules and availability</p>
+                    </div>
+
+                </div>
+
+                <div class="node node4">
+                    <div class="icon-box lime">
+                        <img src="img-icon/inventory.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv">
+                        <h5>Inventory Management</h5>
+                        <p>Medicine & stock control</p>
+                    </div>
+                </div>
+
+                <div class="node node5">
+                    <div class="icon-box yellow">
+                        <img src="img-icon/employee.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv">
+                        <h5>Employee Management</h5>
+                        <p>Staff records & attendance</p>
+                    </div>
+                </div>
+
+                <div class="node node6">
+                    <div class="icon-box orange">
+                        <img src="img-icon/account.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv">
+                        <h5>Accounts Management</h5>
+                        <p>Financial reports & tracking</p>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE -->
+
+                <div class="node node7">
+                    <div class="icon-box orange">
+                        <img src="img-icon/opd.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv1">
+                        <h5>OPD Management</h5>
+                        <p>Outpatient workflow management</p>
+                    </div>
+
+                </div>
+
+                <div class="node node8">
+                    <div class="icon-box yellow">
+                        <img src="img-icon/ipd.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv1">
+                        <h5>IPD Management</h5>
+                        <p>Inpatient admission & discharge</p>
+                    </div>
+                </div>
+
+                <div class="node node9">
+                    <div class="icon-box coral">
+                        <img src="img-icon/day-care.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv1">
+                        <h5>Day Care Management</h5>
+                        <p>Daily treatment & observation</p>
+                    </div>
+                </div>
+
+                <div class="node node10">
+                    <div class="icon-box purple">
+                        <img src="img-icon/diagnosis.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv1">
+                        <h5>Diagnosis Management</h5>
+                        <p>Tests, reports and diagnosis</p>
+                    </div>
+                </div>
+
+                <div class="node node11">
+                    <div class="icon-box blue">
+                        <img src="img-icon/pathalogy.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv1">
+                        <h5>Pathology Management</h5>
+                        <p>Laboratory & sample tracking</p>
+                    </div>
+                </div>
+
+                <div class="node node12">
+                    <div class="icon-box violet">
+                        <img src="img-icon/bill.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv1">
+                        <h5>Billing System</h5>
+                        <p>Invoices and payment tracking</p>
+                    </div>
+                </div>
+
+                <div class="node node13">
+                    <div class="icon-box pink">
+                        <img src="img-icon/nurse.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv0">
+                        <h5>Nursing Management</h5>
+                        <p>Nursing workflow & patient care</p>
+                    </div>
+                </div>
+
+                <div class="node node14">
+                    <div class="icon-box indigo">
+                        <img src="img-icon/user.png" class="img-fluid">
+                    </div>
+                    <div class="txtdiv0">
+                        <h5>Users Management</h5>
+                        <p>User roles and permissions</p>
+                    </div>
+                </div>
+
+                <!-- BOTTOM FEATURE BOX -->
+
+                <div class="feature-box">
+
+                    <div class="feature-item">
+                        <i class="mdi mdi-shield-check-outline"></i>
+                        <h6>Secure</h6>
+                        <span>Protected Data</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="mdi mdi-chart-line"></i>
+                        <h6>Analytics</h6>
+                        <span>Real Time Reports</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="mdi mdi-cog-sync"></i>
+                        <h6>Automation</h6>
+                        <span>Save Time</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="mdi mdi-heart-pulse"></i>
+                        <h6>Patient Care</h6>
+                        <span>Better Experience</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+</body>
+
+</html>
