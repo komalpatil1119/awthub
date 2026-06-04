@@ -169,7 +169,7 @@
         z-index: 10;
     }
 
-  
+
 
     .node h5 {
         font-size: 18px;
@@ -314,7 +314,7 @@
 
     .node4 {
         left: -58px;
-    top: 364px;
+        top: 364px;
         display: flex;
         flex-direction: row-reverse;
     }
@@ -328,7 +328,7 @@
 
     .node6 {
         left: 84px;
-    top: 604px;
+        top: 604px;
 
         display: flex;
         flex-direction: row-reverse;
@@ -428,8 +428,8 @@
     }
 
     .feature-item i {
-        font-size: 35px;        
-    line-height: 35px;
+        font-size: 35px;
+        line-height: 35px;
         color: #0d47a1;
     }
 
@@ -533,7 +533,7 @@
         color: #0d47a1;
     }
 
-    
+
     /* ===================================
    FEATURE BOX HOVER
 =================================== */
@@ -713,7 +713,10 @@
 =================================== */
 
     @media(max-width:767px) {
-
+        .txtdiv1 {
+    width: auto;
+    text-align: left;
+}
         .awthub-wrapper {
             padding: 20px 0;
         }
@@ -743,7 +746,7 @@
         }
 
         .node {
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
 
         .icon-box {
@@ -793,6 +796,7 @@
         }
 
         .feature-box {
+            margin-top: 30px;
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
@@ -836,8 +840,8 @@
         }
 
         .icon-box {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
         }
 
         .icon-box i {
@@ -953,220 +957,240 @@
    SVG CONTAINER
 =================================== */
 
-.node1 .icon-box::after{
-    content: '';
-    position: absolute;
-    width: 0px;
-    height: 43px;
-    border-top: 3px solid #2196f3;
-    border-right: 3px solid #2196f3;
-    right: 35px;
-    top: 71px;
-    transform: rotate(294deg);
-}
+    .node1::after {
+        content: '';
+        position: absolute;
+        width: 0px;
+        height: 43px;
+        border-top: 3px solid #2196f3;
+        border-right: 3px solid #2196f3;
+        right: 35px;
+        top: 71px;
+        transform: rotate(294deg);
+    }
 
-.node1 .icon-box::before{
-    content:'';
-    position:absolute;
-    width:16px;
-    height:16px;
-    border:3px solid #2196f3;
-    background:#fff;
-    border-radius:50%;
-    right: 0px;
-    top: 96px;
-}
-.node{
-    position:absolute;
-}
+    .node1::before {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border: 3px solid #2196f3;
+        background: #fff;
+        border-radius: 50%;
+        right: 0px;
+        top: 96px;
+    }
 
-.node::after{
-    content:'';
-    position:absolute;
-    width:18px;
-    height:18px;
-    background:#fff;
-    border-radius:50%;
-    z-index:20;
-}
-.node2::after{
-    right:-20px;
-    top:55px;
-    border:4px solid #00bcd4;
-}
+    .node {
+        position: absolute;
+    }
 
-/* Doctor */
-.node3::after{
-    right:-16px;
-    top:55px;
-    border:4px solid #4caf50;
-}
+    .node::after {
+        content: '';
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        border-radius: 50%;
+        z-index: 20;
+    }
 
-/* Inventory */
-.node4::after{
-    right:-17px;
-    top:55px;
-    border:4px solid #8bc34a;
-}
+    .node2::after {
+        right: -20px;
+        top: 55px;
+        border: 4px solid #00bcd4;
+    }
 
-/* Employee */
-.node5::after{
-    right: -20px;
-    top: 33px;
-    border:4px solid #ffc107;
-}
+    /* Doctor */
+    .node3::after {
+        right: -16px;
+        top: 55px;
+        border: 4px solid #4caf50;
+    }
 
-/* Accounts */
-.node6::after{
-    right: -9px;
-    top: 10px;
-    border:4px solid #ff9800;
-}
-.node7::after{
-    left: -5px;
-    top: 103px;
-    border:4px solid #ff9800;
-}
+    /* Inventory */
+    .node4::after {
+        right: -17px;
+        top: 55px;
+        border: 4px solid #8bc34a;
+    }
 
-/* IPD */
-.node8::after{
-    left:-20px;
-    top:72px;
-    border:4px solid #ffc107;
-}
+    /* Employee */
+    .node5::after {
+        right: -20px;
+        top: 33px;
+        border: 4px solid #ffc107;
+    }
 
-/* Day Care */
-.node9::after{
-    left:-18px;
-    top:55px;
-    border:4px solid #ff7043;
-}
+    /* Accounts */
+    .node6::after {
+        right: -9px;
+        top: 10px;
+        border: 4px solid #ff9800;
+    }
 
-/* Diagnosis */
-.node10::after{
-    left:-31px;
-    top:55px;
-    border:4px solid #9c27b0;
-}
+    .node7::after {
+        left: -5px;
+        top: 103px;
+        border: 4px solid #ff9800;
+    }
 
-/* Pathology */
-.node11::after{
-    left:-20px;
-    top:26px;
-    border:4px solid #2196f3;
-}
+    /* IPD */
+    .node8::after {
+        left: -20px;
+        top: 72px;
+        border: 4px solid #ffc107;
+    }
 
-/* Billing */
-.node12::after{
-    left: 10px;
-    top: -6px;
-    border:4px solid #7e57c2;
-}
-.node::before{
-    content:'';
-    position:absolute;
-    height:3px;
-    background:currentColor;
-}
-/* Patient */
-.node2::before{
-    width: 50px;
-    right: -18px;
-    top: 62px;
-    background: #00bcd4;
-    transform: rotate(9deg);
-}
+    /* Day Care */
+    .node9::after {
+        left: -18px;
+        top: 55px;
+        border: 4px solid #ff7043;
+    }
 
-/* Doctor */
-.node3::before{
-    width: 48px;
-    right: -12px;
-    top:62px;
-    background:#4caf50;
-    transform: rotate(5deg);
-}
+    /* Diagnosis */
+    .node10::after {
+        left: -31px;
+        top: 55px;
+        border: 4px solid #9c27b0;
+    }
 
-/* Inventory */
-.node4::before{
-    width: 43px;
-    right: -9px;
-    top: 62px;
-    background: #8bc34a;
-    transform: rotate(8deg);
-}
+    /* Pathology */
+    .node11::after {
+        left: -20px;
+        top: 26px;
+        border: 4px solid #2196f3;
+    }
 
-/* Employee */
-.node5::before{
-    width: 40px;
-    right: -11px;
-    top: 41px;
-    background: #ffc107;
-    transform: rotate(357deg);
-}
+    /* Billing */
+    .node12::after {
+        left: 10px;
+        top: -6px;
+        border: 4px solid #7e57c2;
+    }
 
-/* Accounts */
-.node6::before{
-    width: 29px;
-    right: 5px;
-    top: 28px;
-    background:#ff9800;
-    transform:rotate(-25deg);
-}
-/* OPD */
-.node7::before{
-    width: 51px;
-    left: -6px;
-    top: 84px;
-    background: #ff9800;
-    transform: rotate(122deg);
-}
+    .node::before {
+        content: '';
+        position: absolute;
+        height: 3px;
+        background: currentColor;
+    }
 
-/* IPD */
-.node8::before{
-    width: 39px;
-    left: -3px;
-    top: 69px;
-    background: #ffc107;
-    transform: rotate(341deg);
-}
+    /* Patient */
+    .node2::before {
+        width: 50px;
+        right: -18px;
+        top: 62px;
+        background: #00bcd4;
+        transform: rotate(9deg);
+    }
 
-/* Day Care */
-.node9::before{
-    width: 42px;
-    left: -11px;
-    top: 62px;
-    background: #ff7043;
-}
+    /* Doctor */
+    .node3::before {
+        width: 48px;
+        right: -12px;
+        top: 62px;
+        background: #4caf50;
+        transform: rotate(5deg);
+    }
 
-/* Diagnosis */
-.node10::before{
-    width: 57px;
-    left: -23px;
-    top: 62px;
-    background:#9c27b0;
-}
+    /* Inventory */
+    .node4::before {
+        width: 43px;
+        right: -9px;
+        top: 62px;
+        background: #8bc34a;
+        transform: rotate(8deg);
+    }
 
-/* Pathology */
-.node11::before{
-    width: 45px;
-    left: -12px;
-    top: 38px;
-    background:#2196f3;
-    transform:rotate(12deg);
-}
+    /* Employee */
+    .node5::before {
+        width: 40px;
+        right: -11px;
+        top: 41px;
+        background: #ffc107;
+        transform: rotate(357deg);
+    }
 
-/* Billing */
-.node12::before{
-    width: 27px;
-    left: 15px;
-    top: 8px;
-    background: #7e57c2;
-    transform: rotate(37deg);
-}
-.node13::after,
-.node14::after{
-    content:none;
-}
+    /* Accounts */
+    .node6::before {
+        width: 29px;
+        right: 5px;
+        top: 28px;
+        background: #ff9800;
+        transform: rotate(-25deg);
+    }
+
+    /* OPD */
+    .node7::before {
+        width: 51px;
+        left: -6px;
+        top: 84px;
+        background: #ff9800;
+        transform: rotate(122deg);
+    }
+
+    /* IPD */
+    .node8::before {
+        width: 39px;
+        left: -3px;
+        top: 69px;
+        background: #ffc107;
+        transform: rotate(341deg);
+    }
+
+    /* Day Care */
+    .node9::before {
+        width: 42px;
+        left: -11px;
+        top: 62px;
+        background: #ff7043;
+    }
+
+    /* Diagnosis */
+    .node10::before {
+        width: 57px;
+        left: -23px;
+        top: 62px;
+        background: #9c27b0;
+    }
+
+    /* Pathology */
+    .node11::before {
+        width: 45px;
+        left: -12px;
+        top: 38px;
+        background: #2196f3;
+        transform: rotate(12deg);
+    }
+
+    /* Billing */
+    .node12::before {
+        width: 27px;
+        left: 15px;
+        top: 8px;
+        background: #7e57c2;
+        transform: rotate(37deg);
+    }
+
+    .node13::after,
+    .node14::after {
+        content: none;
+    }
+
+    @media (max-width:768px) {
+        .node{
+            position: relative;
+        }
+
+        .node::before,
+        .node::after {
+            display: none !important;
+            content: none !important;
+        }
+
+    }
 </style>
 
 <body>
